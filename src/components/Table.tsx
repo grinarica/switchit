@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react"
 import { useNavigate, useParams } from "react-router";
 import WinModal from "./WinModal";
+import DarkModeToggle from "./DarkModeToggle";
 
 interface Difficulties {
     easy: number,
@@ -78,11 +79,21 @@ function Table() {
 
     return (
         <div
-            className="w-screen h-screen bg-neutral-900 flex flex-col items-center justify-center p-2.5">
+            className="w-screen h-screen flex flex-col items-center justify-center p-2.5
+                       bg-neutral-100
+                       dark:bg-neutral-900">
+
+            <DarkModeToggle />
 
             {showWinModal && <WinModal difficulty={difficulty as "easy" | "normal" | "hard"} moves={totalMoves} />}
 
-            {!showWinModal && <h1 className="text-5xl mb-5 text-white">Moves: {totalMoves}</h1>}
+            {!showWinModal && 
+                <h1 className="text-5xl mb-5 font-bold
+                               text-neutral-800
+                                 dark:text-neutral-100">
+                    Moves: {totalMoves}
+                </h1>
+            }
 
             <div style={{ gridTemplateColumns: `repeat(${tableSize}, minmax(0, 1fr))` }} className={`w-full max-w-3xl aspect-square grid gap-2`}>
                 {table.map((tableRow, rowIndex) => {
@@ -96,7 +107,10 @@ function Table() {
                                     cell
                                     w-full
                                     duration-200
-                                    ${tableCell ? 'bg-neutral-200' : 'bg-neutral-600'}
+                                    ${tableCell ? 
+                                        'bg-neutral-800 dark:bg-neutral-200' : 
+                                        'bg-neutral-300 dark:bg-neutral-600'
+                                    }
                                 `}>
 
                                 </div>

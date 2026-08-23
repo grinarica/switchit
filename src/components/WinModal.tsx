@@ -19,6 +19,7 @@ function WinModal({ difficulty, moves = 0 }: WinModalProps) {
         justify-center 
         items-center 
         backdrop-blur-sm
+        select-none
         bg-neutral-100/80
         dark:bg-neutral-800/90
     ">

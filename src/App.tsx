@@ -1,5 +1,4 @@
 import { BrowserRouter, Route, Routes } from 'react-router'
-import './App.css'
 import Table from './components/Table'
 import Home from './components/Home'
 import BlankDifficulty from './components/BlankDifficulty'

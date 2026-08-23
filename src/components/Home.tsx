@@ -1,8 +1,9 @@
 import { useState } from "react"
 import { Link } from "react-router"
+import DarkModeToggle from "./DarkModeToggle"
 
 function Home() {
-    const [difficulty, setDifficulty] = useState("normal")
+    const [difficulty, setDifficulty] = useState("easy")
 
     const options = [
         { id: "easy", label: "Easy" },
@@ -15,9 +16,11 @@ function Home() {
             bg-gray-100
             dark:bg-neutral-900">
             <div className="max-w-sm w-11/12 h-screen flex flex-col justify-center items-center">
-                <h1 className="text-7xl text-gray-900 dark:text-white mb-4">Switch It</h1>
+                <h1 className="text-7xl text-gray-900 dark:text-white mb-10">Switch It</h1>
 
-                <div className="flex flex-col w-full gap-2 mb-10 mt-10 text-white">
+                <DarkModeToggle />
+
+                <div className="flex flex-col w-full gap-2 mb-8 text-white">
                     {options.map((opt) => (
                         <label
                             key={opt.id}
@@ -45,8 +48,8 @@ function Home() {
                 {/* PLAY BUTTON */}
                 <Link to={`/table/${difficulty}`}
                     className="text-4xl p-3 text-center border-2 w-full transition
-                             bg-neutral-900 text-gray-100 hover:bg-neutral-800
-                             dark:bg-gray-100 dark:text-gray-900 dark:hover:bg-neutral-200">
+                             bg-neutral-900 text-gray-100 hover:bg-neutral-800 border-neutral-900
+                             dark:bg-gray-100 dark:text-gray-900 dark:hover:bg-neutral-200 dark:border-neutral-100">
                     Play
                 </Link>
             </div>
