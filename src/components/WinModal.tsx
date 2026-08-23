@@ -5,10 +5,10 @@ interface WinModalProps {
   moves: number
 }
 
-function WinModal({ difficulty, moves = 0 }: WinModalProps ) {
+function WinModal({ difficulty, moves = 0 }: WinModalProps) {
   return (
-    <div 
-    className="
+    <div
+      className="
         absolute 
         w-screen 
         h-screen 
@@ -18,19 +18,28 @@ function WinModal({ difficulty, moves = 0 }: WinModalProps ) {
         flex-col
         justify-center 
         items-center 
-        bg-neutral-800/90
         backdrop-blur-sm
+        bg-neutral-100/80
+        dark:bg-neutral-800/90
     ">
-        <h1 className="text-5xl text-white">Lights are on!</h1>
-        <h1 className="text-2xl mt-2 text-neutral-100">Completed in {moves} moves</h1>
-        <Link to='/' 
-        className="bg-cyan-500 max-w-72 w-full mt-10 flex justify-center items-center h-10 rounded-lg cursor-pointer">
-            Home
+      <div className="max-w-sm w-11/12 flex flex-col justify-center items-center">
+        <h1 className="text-4xl text-center text-neutral-900 dark:text-neutral-100">All switches are on!</h1>
+        <h1 className="text-2xl mt-4 text-neutral-900  dark:text-neutral-100">Completed in {moves} moves</h1>
+        <Link to={`/table/${difficulty}`}
+          className="w-full mt-10 flex bg-transparent justify-center items-center p-2 cursor-pointer text-3xl transition
+            text-neutral-900 hover:bg-neutral-900 hover:text-neutral-100 border-2 border-neutral-900
+            dark: dark:text-neutral-100 dark:border-2 dark:border-neutral-100 dark:hover:bg-neutral-100 dark:hover:text-neutral-900
+          ">
+          Restart
         </Link>
-        <Link to={`/table/${difficulty}`} 
-        className="bg-amber-500 max-w-72 w-full mt-4 flex justify-center items-center h-10 rounded-lg cursor-pointer">
-            Restart
+        <Link to='/'
+          className="w-full mt-4 flex justify-center items-center p-2 cursor-pointer text-3xl transition
+            bg-neutral-900 text-neutral-100 hover:bg-neutral-800
+            dark:bg-neutral-100 dark:text-neutral-900 dark:hover:bg-neutral-300
+          ">
+          Home
         </Link>
+      </div>
     </div>
   )
 }

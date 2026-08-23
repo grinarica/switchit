@@ -11,11 +11,11 @@ function Home() {
     ]
 
     return (
-        <div className="w-screen h-screen flex flex-col justify-center items-center
+        <div className="w-screen h-screen flex flex-col justify-center items-center select-none
             bg-gray-100
-            dark:bg-neutral-800">
+            dark:bg-neutral-900">
             <div className="max-w-sm w-11/12 h-screen flex flex-col justify-center items-center">
-                <h1 className="text-7xl text-gray-950 dark:text-white mb-4">Switch It</h1>
+                <h1 className="text-7xl text-gray-900 dark:text-white mb-4">Switch It</h1>
 
                 <div className="flex flex-col w-full gap-2 mb-10 mt-10 text-white">
                     {options.map((opt) => (
@@ -24,8 +24,8 @@ function Home() {
                             className={`
                         cursor-pointer px-4 py-3 text-3xl transition-colors border-2 text-center
                         ${difficulty === opt.id
-                                    ? "bg-gray-100 text-neutral-900 border-gray-100"
-                                    : "bg-neutral-800 text-neutral-300 border-neutral-400 hover:bg-neutral-700"
+                                    ? "bg-neutral-900 border-neutral-900 dark:bg-gray-100 dark:text-neutral-900 dark:border-gray-100"
+                                    : "bg-neutral-100 text-neutral-800 hover:bg-neutral-200 dark:bg-neutral-900 dark:text-neutral-200 dark:border-neutral-200 dark:hover:bg-neutral-800"
                                 }
                     `}
                         >
@@ -44,9 +44,9 @@ function Home() {
 
                 {/* PLAY BUTTON */}
                 <Link to={`/table/${difficulty}`}
-                    className="text-4xl p-3 text-center border-2 w-full
-                             text-gray-100
-                             dark:bg-gray-100 dark:text-gray-900">
+                    className="text-4xl p-3 text-center border-2 w-full transition
+                             bg-neutral-900 text-gray-100 hover:bg-neutral-800
+                             dark:bg-gray-100 dark:text-gray-900 dark:hover:bg-neutral-200">
                     Play
                 </Link>
             </div>

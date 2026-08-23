@@ -78,7 +78,7 @@ function Table() {
 
     return (
         <div
-            className="w-screen h-screen bg-neutral-800 flex flex-col items-center justify-center p-2.5">
+            className="w-screen h-screen bg-neutral-900 flex flex-col items-center justify-center p-2.5">
 
             {showWinModal && <WinModal difficulty={difficulty as "easy" | "normal" | "hard"} moves={totalMoves} />}
 
