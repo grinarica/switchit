@@ -16,8 +16,8 @@ function WinModal({ moves = 0 }: WinModalProps) {
       className="
         absolute
         z-40
-        w-screen 
-        h-screen 
+        w-svw 
+        h-svh 
         top-0 
         left-0 
         flex

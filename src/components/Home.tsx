@@ -12,7 +12,7 @@ function Home() {
     ]
 
     return (
-        <div className="w-screen h-screen flex flex-col justify-center items-center select-none
+        <div className="w-svw h-svh flex flex-col justify-center items-center select-none
             bg-gray-100
             dark:bg-neutral-900">
             <div className="max-w-sm w-11/12 h-screen flex flex-col justify-center items-center">

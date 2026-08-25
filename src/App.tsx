@@ -1,11 +1,11 @@
-import { BrowserRouter, Route, Routes } from 'react-router'
+import { HashRouter, Route, Routes } from 'react-router'
 import Table from './components/Table'
 import Home from './components/Home'
 import BlankDifficulty from './components/BlankDifficulty'
 
 function App() {
   return (
-    <BrowserRouter>
+    <HashRouter>
       <Routes>
 
         <Route path='/' element={<Home />} />
@@ -14,7 +14,7 @@ function App() {
         <Route path='/table/' element={<BlankDifficulty />} />
 
       </Routes>
-    </BrowserRouter>
+    </HashRouter>
   )
 }
 

@@ -2,6 +2,7 @@ import { useEffect, useState } from "react"
 import { useNavigate, useParams } from "react-router";
 import WinModal from "./WinModal";
 import DarkModeToggle from "./DarkModeToggle";
+import { playClickSound, playWinSound } from "../utils/audio";
 
 interface Difficulties {
     easy: number,
@@ -30,12 +31,37 @@ function Table() {
         if (!tableSize) navigate("/")
     }, [tableSize, navigate])
 
-    const [table, setTable] = useState(
-        Array.from({ length: tableSize }, () => Array(tableSize).fill(false))
-    )
+    const [table, setTable] = useState(() => {
+        // 1. Generate initial grid
+        const grid = Array.from({ length: tableSize }, () =>
+            Array.from({ length: tableSize }, () => Math.random() < 0.1)
+        );
+
+        // Helper to pick random coordinates
+        const getRandomCoord = () => Math.floor(Math.random() * tableSize);
+
+        // 2. Flatten grid to check total true/false counts easily
+        const flatGrid = grid.flat();
+        const hasTrue = flatGrid.includes(true);
+        const hasFalse = flatGrid.includes(false);
+
+        // 3. Guarantee at least one true
+        if (!hasTrue && tableSize > 0) {
+            grid[getRandomCoord()][getRandomCoord()] = true;
+        }
+
+        // 4. Guarantee at least one false
+        if (!hasFalse && tableSize > 0) {
+            grid[getRandomCoord()][getRandomCoord()] = false;
+        }
+
+        return grid;
+    });
 
     const handleClick = (x: number, y: number) => {
         if (!playing) return
+
+        playClickSound()
 
         const updatedTable = table.map((tableRow, rowIndex) => {
             return tableRow.map((tableCell: boolean, cellIndex: number) => {
@@ -72,6 +98,7 @@ function Table() {
 
     useEffect(() => {
         if (checkWin()) {
+            playWinSound()
             setPlaying(false)
             setShowWinModal(true)
         }
@@ -79,7 +106,7 @@ function Table() {
 
     return (
         <div
-            className="w-screen h-screen flex flex-col items-center justify-center p-2.5
+            className="w-svw h-svh flex flex-col items-center justify-center p-2.5
                        bg-neutral-100
                        dark:bg-neutral-900">
 
@@ -87,7 +114,7 @@ function Table() {
 
             {showWinModal && <WinModal moves={totalMoves} />}
 
-            {!showWinModal && 
+            {!showWinModal &&
                 <h1 className="text-5xl mb-5 font-bold
                                text-neutral-800
                                  dark:text-neutral-100">
@@ -107,10 +134,10 @@ function Table() {
                                     cell
                                     w-full
                                     duration-200
-                                    ${tableCell ? 
-                                        'bg-neutral-800 dark:bg-neutral-200' : 
-                                        'bg-neutral-300 dark:bg-neutral-600'
-                                    }
+                                    ${tableCell ?
+                                            'bg-neutral-800 dark:bg-neutral-200' :
+                                            'bg-neutral-300 dark:bg-neutral-600'
+                                        }
                                 `}>
 
                                 </div>
