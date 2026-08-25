@@ -25,10 +25,11 @@ export default function DarkModeToggle() {
   return (
     <button
       onClick={() => setIsDark(!isDark)}
-      className="size-13 absolute top-2 right-2 flex flex-row justify-center items-center gap-2 text-2xl
+      className="size-13 z-50 absolute top-2 right-2 flex flex-row justify-center items-center gap-2 text-2xl
                  bg-neutral-800 text-neutral-100
                  dark:bg-neutral-200"
     >
+      {/* BootsTrap Icons */}
       {isDark ? (
         <>
           <svg className="fill-neutral-800 p-3 size-full" viewBox="0 0 16 16">

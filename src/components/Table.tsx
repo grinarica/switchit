@@ -85,7 +85,7 @@ function Table() {
 
             <DarkModeToggle />
 
-            {showWinModal && <WinModal difficulty={difficulty as "easy" | "normal" | "hard"} moves={totalMoves} />}
+            {showWinModal && <WinModal moves={totalMoves} />}
 
             {!showWinModal && 
                 <h1 className="text-5xl mb-5 font-bold
