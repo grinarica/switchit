@@ -6,7 +6,7 @@ function BlankDifficulty() {
 
   useEffect(() => {
     navigate("/")
-  }, [])
+  }, [navigate])
 
   return (
     <div></div>

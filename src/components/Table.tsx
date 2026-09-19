@@ -57,6 +57,18 @@ function Table() {
         return grid;
     });
 
+    const checkWin = (gridToCheck: boolean[][]) => {
+        let win = true
+
+        gridToCheck.forEach(tableRow => {
+            tableRow.forEach((tableCell: boolean) => {
+                if (!tableCell) win = false
+            })
+        })
+
+        return win
+    }
+
     const handleClick = (x: number, y: number) => {
         if (!playing) return
 
@@ -81,27 +93,13 @@ function Table() {
 
         setTotalMoves(totalMoves + 1)
         setTable(updatedTable);
-    };
 
-    const checkWin = () => {
-        let win = true
-
-        table.forEach(tableRow => {
-            tableRow.forEach((tableCell: boolean) => {
-                if (!tableCell) win = false
-            })
-        })
-
-        return win
-    }
-
-    useEffect(() => {
-        if (checkWin()) {
+        if (checkWin(updatedTable)) {
             playWinSound()
             setPlaying(false)
             setShowWinModal(true)
         }
-    }, [table])
+    };
 
     useEffect(() => {
         playStartSound()
