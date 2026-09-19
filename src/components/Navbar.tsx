@@ -6,16 +6,6 @@ function Navbar() {
     const navigate = useNavigate()
     const location = useLocation()
 
-    const [isDark, setIsDark] = useState(() => {
-        const savedTheme = localStorage.getItem("theme");
-
-        if (savedTheme) {
-            return savedTheme === "dark";
-        }
-
-        return window.matchMedia("(prefers-color-scheme: dark)").matches;
-    });
-
     const [isMuted, setIsMuted] = useState(() => {
         const savedMuted = localStorage.getItem("muted")
 
