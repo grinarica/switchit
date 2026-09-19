@@ -1,6 +1,6 @@
 import { useState } from "react"
 import { Link } from "react-router"
-import DarkModeToggle from "./DarkModeToggle"
+import { playUiClickSound } from "../utils/audio"
 
 function Home() {
     const [difficulty, setDifficulty] = useState("easy")
@@ -12,13 +12,11 @@ function Home() {
     ]
 
     return (
-        <div className="w-svw h-svh flex flex-col justify-center items-center select-none
+        <div className="h-full w-full flex flex-col justify-center items-center select-none
             bg-gray-100
             dark:bg-neutral-900">
-            <div className="max-w-sm w-11/12 h-screen flex flex-col justify-center items-center">
+            <div className="max-w-sm w-11/12 flex flex-col justify-center items-center">
                 <h1 className="text-7xl text-gray-900 dark:text-white mb-10">Switch It</h1>
-
-                <DarkModeToggle />
 
                 <div className="flex flex-col w-full gap-2 mb-8 text-white">
                     {options.map((opt) => (
@@ -36,6 +34,7 @@ function Home() {
                                 type="radio"
                                 name="difficulty"
                                 value={opt.id}
+                                onClick={() => playUiClickSound()}
                                 checked={difficulty === opt.id}
                                 onChange={(e) => setDifficulty(e.target.value)}
                                 className="hidden" // Hides the default browser circle

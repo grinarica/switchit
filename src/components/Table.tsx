@@ -1,8 +1,7 @@
 import { useEffect, useState } from "react"
 import { useNavigate, useParams } from "react-router";
 import WinModal from "./WinModal";
-import DarkModeToggle from "./DarkModeToggle";
-import { playClickSound, playWinSound } from "../utils/audio";
+import { playClickSound, playWinSound, playStartSound } from "../utils/audio";
 
 interface Difficulties {
     easy: number,
@@ -104,48 +103,54 @@ function Table() {
         }
     }, [table])
 
+    useEffect(() => {
+        playStartSound()
+    }, [])
+
     return (
         <div
-            className="w-svw h-svh flex flex-col items-center justify-center p-2.5
-                       bg-neutral-100
-                       dark:bg-neutral-900">
-
-            <DarkModeToggle />
-
+            className="w-full h-screen flex flex-col items-center justify-center p-4 overflow-hidden
+                       bg-neutral-100 dark:bg-neutral-900"
+        >
             {showWinModal && <WinModal moves={totalMoves} />}
 
-            {!showWinModal &&
-                <h1 className="text-5xl mb-5 font-bold
-                               text-neutral-800
-                                 dark:text-neutral-100">
+            {!showWinModal && (
+                <h1 className="text-3xl sm:text-4xl md:text-5xl mb-4 font-bold shrink-0
+                               text-neutral-800 dark:text-neutral-100">
                     Moves: {totalMoves}
                 </h1>
-            }
+            )}
 
-            <div style={{ gridTemplateColumns: `repeat(${tableSize}, minmax(0, 1fr))` }} className={`w-full max-w-3xl aspect-square grid gap-2`}>
-                {table.map((tableRow, rowIndex) => {
-                    return (
-                        tableRow.map((tableCell: boolean, cellIndex: number) => {
-                            return (
-                                <div
-                                    onClick={() => handleClick(rowIndex, cellIndex)}
-                                    key={`${rowIndex}-${cellIndex}`}
-                                    className={`
-                                    cell
-                                    w-full
-                                    duration-200
+            <div 
+                style={{
+                    width: 'min(85vw, 65vh)',
+                    height: 'min(85vw, 65vh)'
+                }}
+                className="flex items-center justify-center"
+            >
+                <div
+                    style={{
+                        gridTemplateColumns: `repeat(${tableSize}, minmax(0, 1fr))`,
+                        gridTemplateRows: `repeat(${tableSize}, minmax(0, 1fr))`
+                    }}
+                    className="w-full h-full grid gap-2"
+                >
+                    {table.map((tableRow, rowIndex) =>
+                        tableRow.map((tableCell: boolean, cellIndex: number) => (
+                            <div
+                                onClick={() => handleClick(rowIndex, cellIndex)}
+                                key={`${rowIndex}-${cellIndex}`}
+                                className={`
+                                    w-full h-full duration-200 cursor-pointer rounded-sm
                                     ${tableCell ?
-                                            'bg-neutral-800 dark:bg-neutral-200' :
-                                            'bg-neutral-300 dark:bg-neutral-600'
-                                        }
-                                `}>
-
-                                </div>
-                            )
-                        }
-                        )
-                    )
-                })}
+                                        'bg-neutral-800 dark:bg-neutral-200' :
+                                        'bg-neutral-300 dark:bg-neutral-600'
+                                    }
+                                `}
+                            />
+                        ))
+                    )}
+                </div>
             </div>
         </div>
     )

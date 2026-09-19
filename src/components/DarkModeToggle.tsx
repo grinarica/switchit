@@ -25,9 +25,9 @@ export default function DarkModeToggle() {
   return (
     <button
       onClick={() => setIsDark(!isDark)}
-      className="size-13 z-50 absolute top-2 right-2 flex flex-row justify-center items-center gap-2 text-2xl
+      className="size-13 z-50 flex flex-row justify-center items-center gap-2 text-2xl
                  bg-neutral-800 text-neutral-100
-                 dark:bg-neutral-200"
+                 dark:bg-neutral-200 cursor-pointer"
     >
       {/* BootsTrap Icons */}
       {isDark ? (
